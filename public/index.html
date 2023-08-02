@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Hello World</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <h1>Hello World!</h1>
+    <h3>Hosted from AWS S3</h3>
+
+    <label>First Name:</label><br>
+    <input id="fname" type="text"></input><br><br>
+
+    <label>Last Name:</label><br>
+    <input id="lname" type="text"></input><br><br>
+
+    <button id="getData">Get Data!</button>
+
+    <script>
+      // TODO: put array/user input into database
+      // TODO: read database and show in UI
+
+      const button = document.getElementById("getData");
+      button.addEventListener("click", async (event) => {
+        let firstName = document.getElementById("fname").value;
+        let lastName = document.getElementById("lname").value;
+        const data = { firstName, lastName };
+
+        const timeStamp = Date.now();
+        data.timeStamp = timeStamp;
+
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+
+        let response = await fetch("/api", options);
+        let json = await response.json();
+        console.log(json);
+      });
+    </script>
+  </body>
+</html>

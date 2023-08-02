@@ -1,5 +1,7 @@
 # This is a test Markdown document
 
+Link to static website hosted on AWS S3: https://jackpitz-bucket.s3.amazonaws.com/index.html
+
 List of things that will be included
 
 - Apps I've built
